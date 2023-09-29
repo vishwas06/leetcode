@@ -2,19 +2,16 @@ class Solution {
     public int maxProduct(int[] nums) {
         int n=nums.length;
         int max=Integer.MIN_VALUE;
+        int preffix=1;
+        int suffix=1;
+
         for(int i=0; i<n; i++){
-            int sum;
-            if(nums[i]<=0){
-                sum=nums[i];
-                max = Math.max(sum, max);
-            }else{
-                sum=nums[i];
-                 max = Math.max(sum, max);
-            }
-            for(int j=i+1; j<n; j++){
-                sum=sum*nums[j];
-                max=Math.max(max, sum);
-            }
+            if(preffix==0)preffix=1;
+            if(suffix==0)suffix=1;
+
+            preffix=preffix*nums[i];
+            suffix=suffix*nums[n-i-1];
+            max=Math.max(max, Math.max(preffix, suffix));
         }
         return max;
     }
